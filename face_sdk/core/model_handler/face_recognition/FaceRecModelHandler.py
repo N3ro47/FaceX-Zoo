@@ -38,20 +38,16 @@ class FaceRecModelHandler(BaseModelHandler):
             A numpy array, the output feature, shape (512,), 
         """
         try:
-            print("hahha")
             image = self._preprocess(image)
         except Exception as e:
             raise e
 
-        print("a")
+
         image = torch.unsqueeze(image, 0)
-        print("a")
         image = image.to(self.device)
-        print("b")
         self.model.to(self.device) 
         with torch.no_grad():
             feature = self.model(image).cpu().numpy()
-            print("c")
         feature = np.squeeze(feature)
         return feature
 
