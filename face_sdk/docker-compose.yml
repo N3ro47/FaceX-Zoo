@@ -1,0 +1,21 @@
+
+services:
+  face-recognition:
+    build:
+      context: ..
+      dockerfile: face_sdk/Dockerfile
+    container_name: face-recognition
+    privileged: true  # Required for camera access
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - PYTHONPATH=/app/face_sdk:/app
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix  # X11 socket for GUI
+      - /dev/video0:/dev/video0  # Camera device
+      - ./config:/app/config  # Configuration files
+      - ./tmp:/app/tmp  # Temporary files
+      - ./logs:/app/logs  # Log files
+    network_mode: host  # Required for X11 forwarding
+    working_dir: /app/face_sdk
+    command: python api_usage/configurator.py  # Default to configurator GUI 

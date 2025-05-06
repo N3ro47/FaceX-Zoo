@@ -3,7 +3,6 @@ from tkinter import ttk, filedialog, messagebox
 import json
 import os
 import subprocess
-from pathlib import Path
 
 class ConfiguratorGUI:
     def __init__(self, root):
