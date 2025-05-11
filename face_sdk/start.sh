@@ -68,7 +68,7 @@ run_application() {
             ;;
         "main")
             print_status "Starting Face Recognition Main Application..."
-            docker-compose run --rm face-recognition python api_usage/main.py -c
+            docker-compose run --rm face-recognition python api_usage/main.py -m image_taker --load /app/config/config.json
             ;;
         *)
             print_error "Invalid option"
@@ -107,4 +107,4 @@ while true; do
             print_error "Invalid option"
             ;;
     esac
-done 
+done
